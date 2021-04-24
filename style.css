@@ -1,0 +1,17 @@
+#menu {
+    position: fixed;
+    height:100px;
+    width:100%;
+    background-color:blue;
+}
+#container {
+    display:grid;
+    padding-top:100px;
+    grid-template-rows: repeat(var(--grid-rows), 1fr);
+    grid-template-columns: repeat(var(--grid-cols), 1fr);
+}
+button {
+    height:40px;
+    width:40px;
+    padding:0.5px;
+}
