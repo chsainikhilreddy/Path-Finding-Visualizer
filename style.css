@@ -1,17 +1,42 @@
-#menu {
-    position: fixed;
-    height:100px;
-    width:100%;
-    background-color:blue;
+html {
+    height:100%;
 }
+body {
+    display:grid;
+    grid-template-rows: 20% 75%;
+    min-height: 100%;
+    padding:0px;
+}
+
 #container {
     display:grid;
-    padding-top:100px;
+    height:100%;
+    width:100%;
     grid-template-rows: repeat(var(--grid-rows), 1fr);
     grid-template-columns: repeat(var(--grid-cols), 1fr);
 }
-button {
-    height:40px;
-    width:40px;
-    padding:0.5px;
+td {
+
 }
+button {
+    height:auto;
+    width:auto;
+    padding:0px;
+    color:green;
+}
+@keyframes visitedAnimation {
+  from {background-color: red;}
+  to {background-color: yellow;}
+}
+.visited {
+    border: 1px solid rgb(175, 216, 248);
+    animation-name: visitedAnimation;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+

@@ -1,4 +1,4 @@
-var H = 0, W = 0, rows = 0, cols = 0, visited;
+var H = 0, W = 0, rows = 0, cols = 0, visited, start, end;
 
         H = window.innerHeight - 100;
         W = window.innerWidth;
@@ -6,8 +6,10 @@ var H = 0, W = 0, rows = 0, cols = 0, visited;
         let d1 = Math.floor((W + 2 * p) / (2 * p + w));
         let d2 = Math.floor((H + 2 * pt) / (2 * pt + h));
         console.log(d1, d2);
-        rows = d2
+        rows = d2;
         cols = d1;
+        start = 1;
+        end = rows * cols;
         console.log(rows,cols);
         console.log(H, W);
         visited = Array(rows).fill().map(() => Array(cols).fill(false));
@@ -18,9 +20,9 @@ var H = 0, W = 0, rows = 0, cols = 0, visited;
             let cell = document.createElement("button");
             cell.setAttribute("id", "button"+(c + 1));
             cell.innerText = (c + 1);
-            cell.setAttribute("draggable",true);
+            cell.setAttribute("draggable",(c + 1) === start || (c + 1) === end);
             cell.addEventListener("ondrop",function() {
-                console.log(document.getElementById("button" + (c + 1)).style.backgroundColor);
+                // console.log(document.getElementById("button" + (c + 1)).style.backgroundColor);
                 if (document.getElementById("button" + (c + 1)).style.backgroundColor == 'blue') {
                     document.getElementById("button" + (c + 1)).style.backgroundColor = '#EFEFEF';
                    // document.getElementById("button" + (c + 1)).setAttribute("style", "background-color:#EFEFEF");
@@ -29,7 +31,7 @@ var H = 0, W = 0, rows = 0, cols = 0, visited;
                 }
             });
             container.appendChild(cell).className = "grid-item";
-            
+
         };
 
 
@@ -37,11 +39,12 @@ var dx = [0, 1, -1, 0];
 var dy = [1, 0, 0, -1];
 bfs(0, 0);
 var flag = false;
-function dfs(row, col) {
+async function dfs(row, col) {
     if (row == 10 && col == 8) {
         return true;
     }
-    document.getElementById("button" + (row * cols + col + 1)).style.backgroundColor = 'green';
+    document.getElementById("button" + (row * cols + col + 1)).className = "visited";
+    await delay(20);
     visited[row][col] = true;
     for (let i = 0; i < dx.length; i++) {
         let new_row = row + dx[i];
@@ -55,11 +58,16 @@ function dfs(row, col) {
     return false;
 }
 
-
-function bfs(row, col) {
+function delay(delayInms) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(2);
+      }, delayInms);
+    });
+}
+async function bfs(row, col) {
     class queue_ {
         constructor() {
-            console.log("Nikhil");
             this.arr = new Array(1000), this.front = -1, this.rear = -1;
         }
         push(x) {
@@ -83,7 +91,7 @@ function bfs(row, col) {
         size() {
             return this.isEmpty() ? 0 : this.rear - this.front + 1;
         }
-    
+
     }
     var q = new queue_();
     q.push([row, col]);
@@ -92,7 +100,10 @@ function bfs(row, col) {
         let sz = q.size();
         for (let i = 0; i < sz; i++) {
             let top = q.front_();
-            document.getElementById("button" + (top[0] * cols + top[1] + 1)).style.backgroundColor = 'green';
+            // console.log(document.getElementById("button" + (top[0] * cols + top[1] + 1)).className);
+            document.getElementById("button" + (top[0] * cols + top[1] + 1)).className = "visited";
+            await delay(20);
+            
             q.pop();
             if (top[0] == 10 && top[1] == 8) {
                 return;
