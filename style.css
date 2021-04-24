@@ -15,9 +15,6 @@ body {
     grid-template-rows: repeat(var(--grid-rows), 1fr);
     grid-template-columns: repeat(var(--grid-cols), 1fr);
 }
-td {
-
-}
 button {
     height:auto;
     width:auto;
