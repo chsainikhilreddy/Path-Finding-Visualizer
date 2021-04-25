@@ -21,9 +21,9 @@ function initialize() {
         let cell = document.createElement("button");
         cell.setAttribute("id", "button" + (c + 1));
         container.appendChild(cell);
-    };
+    }
     for (let c = 0; c < (rows * cols); c++) {
-        const btn = document.getElementById("button" + (c + 1))
+        const btn = document.getElementById("button" + (c + 1));
         btn.className = "unvisited";
         btn.addEventListener("click", function() {
             if (!mainFlag) {
@@ -44,7 +44,8 @@ function initialize() {
             let c = document.getElementById("src-c").value;
 
             if (!Number.isNaN(r) && !Number.isNaN(c) && r <= rows && r > 0 && c <= cols && c > 0) {
-                --r, --c;
+                --r;
+                --c;
                 const buttonId = r * cols + c + 1;
                 if (buttonId == destNode && destNode != null) {
                     alert("Please choose different Source and Destination");
@@ -66,7 +67,8 @@ function initialize() {
             let c = document.getElementById("dest-c").value;
 
             if (!Number.isNaN(r) && !Number.isNaN(c) && r <= rows && r > 0 && c <= cols && c > 0) {
-                --r, --c;
+                --r;
+                --c;
                 const buttonId = r * cols + c + 1;
                 if (buttonId == srcNode && srcNode != null) {
                     alert("Please choose different Source and Destination");
@@ -112,7 +114,6 @@ function clearBoard() {
         for (let c = 0; c < (rows * cols); c++) {
             document.getElementById("button" + (c + 1)).className = "unvisited";
         }
-        algorithm = 'dfs';
     }
 }
 
@@ -135,8 +136,8 @@ async function printPath(key, prev) {
 
     }
 }
-async function bfs(src_row, src_col, dest_row, dest_col) {
-    let q = []
+async function bfs(src_row, src_col) {
+    let q = [];
     q.push([src_row, src_col]);
     let prev = [];
     for (let i = 0; i < (rows * cols); i++) {
@@ -155,7 +156,7 @@ async function bfs(src_row, src_col, dest_row, dest_col) {
                     var temp = document.getElementById("button" + (new_row * cols + new_col + 1)).className;
                     if (temp == 'destination') {
                         prev[new_row * cols + new_col] = top[0] * cols + top[1];
-                        printPath(destNode - 1, prev);
+                        printPath(prev[destNode - 1], prev);
                         return;
                     }
                     if (temp != 'unvisited') {
@@ -218,7 +219,7 @@ async function bidirectionalBfs(src_row, src_col, dest_row, dest_col) {
                 let new_row = top[0] + dx[j];
                 let new_col = top[1] + dy[j];
                 if (new_row < rows && new_row >= 0 && new_col < cols && new_col >= 0) {
-                    var temp = document.getElementById("button" + (new_row * cols + new_col + 1)).className;
+                    let temp = document.getElementById("button" + (new_row * cols + new_col + 1)).className;
                     if (temp == 'frontvisited') {
                         prev2[new_row * cols + new_col] = top[0] * cols + top[1];
                         printPath(new_row * cols + new_col, prev);
@@ -243,7 +244,7 @@ async function dfs(row, col) {
         document.getElementById("button" + (row * cols + col + 1)).className = "visited";
     }
 
-    await delay(10);
+    await delay(30);
     for (let i = 0; i < dx.length; i++) {
         let new_row = row + dx[i];
         let new_col = col + dy[i];
@@ -259,7 +260,8 @@ async function dfs(row, col) {
 }
 
 function dfs_helper(src, dest) {
-    --src, --dest;
+    --src;
+    --dest;
     let src_row = Math.floor(src / cols),
         src_col = src % cols;
     let dest_row = Math.floor(dest / cols),
@@ -268,16 +270,16 @@ function dfs_helper(src, dest) {
 }
 
 function bfs_helper(src, dest) {
-    --src, --dest;
+    --src;
+    --dest;
     let src_row = Math.floor(src / cols),
         src_col = src % cols;
-    let dest_row = Math.floor(dest / cols),
-        dest_col = dest % cols;
-    bfs(src_row, src_col, dest_row, dest_col);
+    bfs(src_row, src_col);
 }
 
 function bidirectionalBfsHelper(src, dest) {
-    --src, --dest;
+    --src;
+    --dest;
     let src_row = Math.floor(src / cols),
         src_col = src % cols;
     let dest_row = Math.floor(dest / cols),

@@ -42,7 +42,6 @@ button {
     animation-name: visitedAnimation;
     animation-duration: 1.5s;
     animation-timing-function: ease-out;
-    animation-delay: 0;
     animation-direction: alternate;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
@@ -89,9 +88,6 @@ button {
 #details {
     color:white;
     text-align:center;
-}
-.text-field {
-    size:5;
 }
 .t {
     padding-top:2%;;
