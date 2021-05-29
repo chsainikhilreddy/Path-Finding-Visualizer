@@ -1,3 +1,45 @@
+
+
+#navigationBar {
+    background-color: #9bd5d9;
+    font-weight: 200;
+    font-family: 'Courier New', Courier, monospace;
+    align-items: center;
+}
+
+.path {
+    background-color:#9bd5d9;
+}
+
+.inherit-color {
+    color: inherit;
+    font-family:inherit;
+    font-weight:inherit;
+    align-items: center;
+}
+
+.visited,.frontvisited,.backvisited {
+    border: 1px solid rgb(175, 216, 248);
+    animation-name: visitedAnimation;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+.navibar {
+    font-size: large;
+}
+
+
+#uday2 {
+    justify-content: space-evenly;
+    width: 100%;
+    color: inherit;
+}
+
 html {
     height: 100%;
 }
@@ -33,20 +75,11 @@ button {
     }
 
     to {
-        background-color: yellow;
+        background-color: #eefa94;
     }
 }
 
-.visited,.frontvisited,.backvisited {
-    border: 1px solid rgb(175, 216, 248);
-    animation-name: visitedAnimation;
-    animation-duration: 1.5s;
-    animation-timing-function: ease-out;
-    animation-direction: alternate;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
-    animation-play-state: running;
-}
+
 
 .menu-button {
     height:50%;
@@ -118,11 +151,38 @@ td {
     padding:0;
 }
 .source {
-    background-color:green;
+    /* //background-image: url(https://clementmihailescu.github.io/Pathfinding-Visualizer/public/styling/triangletwo-right.svg); */
+    background-color: green;
 }
 .destination {
+    /* background-image: url(https://clementmihailescu.github.io/Pathfinding-Visualizer/public/styling/triangletwo-right.svg); */
     background-color: red;
 }
-.path {
-    background-color:#7062ac;
+
+
+.material-icons-start-flag {
+    border: 1px solid rgb(175, 216, 248);
+    opacity: 0.5;
+   
+    background-color: rgb(255, 254, 106);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    animation-name: specialNodes;
+    animation-duration: 2.0s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards; 
+    animation-play-state: running;
 }
+
+
+
+
+
+
+
+
+
