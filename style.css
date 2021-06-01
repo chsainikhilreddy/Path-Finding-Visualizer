@@ -1,21 +1,30 @@
-
-
 #navigationBar {
-    background-color: #9bd5d9;
+    display:flex;
+    background-color: #D5CBE7;
     font-weight: 200;
     font-family: 'Courier New', Courier, monospace;
     align-items: center;
+    font-size:medium;
+    flex-wrap:wrap;
+}
+#title {
+    font-size:large;
 }
 
 .path {
-    background-color:#9bd5d9;
+    background-color:#D5CBE7;
 }
-
-.inherit-color {
+.collapse li, .grid-container {
+    display: flex;
+    flex-direction:column;
+    justify-content:center;
+}
+.inhrt-prop {
     color: inherit;
     font-family:inherit;
     font-weight:inherit;
     align-items: center;
+    font-size:inherit;
 }
 
 .visited,.frontvisited,.backvisited {
@@ -29,44 +38,48 @@
     animation-play-state: running;
 }
 
-.navibar {
-    font-size: large;
-}
-
-
-#uday2 {
-    justify-content: space-evenly;
-    width: 100%;
-    color: inherit;
-}
-
 html {
     height: 100%;
 }
 
 body {
-    display: grid;
-    grid-template-rows: 20% 75%;
     min-height: 100%;
     padding: 0px;
 }
-
+@media (min-width: 992px){
+    .navbar li {
+        margin-left : 1em;
+        margin-right : 1em;
+    }
+}
+.btn-text {
+    width:fit-content;
+}
+@media (min-width: 992px) {
+    .btn-text {
+        font-size:1.01vw;
+    }
+}
 #container {
     display: grid;
-    height: 100%;
     width: 100%;
+    padding-top:10px;
+    border-bottom:1px solid black;
+    border-left:1px solid black;
     grid-template-rows: repeat(var(--grid-rows), 1fr);
     grid-template-columns: repeat(var(--grid-cols), 1fr);
 }
-
+.navbar-btn {
+    background-color:#71c7b3;
+}
 button {
     height: auto;
     width: auto;
     min-height:15px;
     min-width:15px;
-    padding: 0px;
     background-color: white;
-    border-width: thin;
+    border-style:solid;
+    border-width:1px 1px 0px 0px;
 }
 
 @keyframes visitedAnimation {
@@ -78,111 +91,17 @@ button {
         background-color: #eefa94;
     }
 }
-
-
-
-.menu-button {
-    height:50%;
-    width:70%;
-    background-color:green;
-    color:white;
-    font-weight: bolder;
-}
-#menu {
-    display:grid;
-    grid-template-columns:15% 30% auto;
-    background-color:#7062ac;
-    margin:5px 5px 10px 5px;
-}
-.menu-button:hover {
-    background-color: yellow;
-    color: #7062ac;
-}
-#select2 {
-    display:grid;
-    grid-template-rows: 50% 50%;
-}
-#select {
-    text-align: center;
-    padding:10px;
-}
-.algorithms {
-    width:100%;
-    height:80%;
-    text-align: center;
-    font-weight: 400;
-}
 .wall {
     background-color:black;
 }
-#button-section {
-    text-align:center;
-}
-#details {
-    color:white;
-    text-align:center;
-}
-.t {
-    padding-top:2%;;
-}
-#clear-section {
-    height:40%;
-    width:70%;
-    margin:3%;
-    text-align: center;
-}
-#clear {
-    text-align: center;
-}
-.show {
-    width:100%;
-    height:100%;
-    font-weight: bold;
-    padding:0;
-}
-table {
-    width:100%;
-    padding:3px;
-    margin-top:3%;
-}
-td {
-    font-size:100%;
-    height:100%;
-    padding:0;
-}
 .source {
-    /* //background-image: url(https://clementmihailescu.github.io/Pathfinding-Visualizer/public/styling/triangletwo-right.svg); */
-    background-color: green;
+    background-color: #71c7b3;
 }
 .destination {
-    /* background-image: url(https://clementmihailescu.github.io/Pathfinding-Visualizer/public/styling/triangletwo-right.svg); */
-    background-color: red;
+    background-color: #e36f7d;
 }
 
-
-.material-icons-start-flag {
-    border: 1px solid rgb(175, 216, 248);
-    opacity: 0.5;
-   
-    background-color: rgb(255, 254, 106);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    animation-name: specialNodes;
-    animation-duration: 2.0s;
-    animation-timing-function: ease-out;
-    animation-delay: 0;
-    animation-direction: alternate;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards; 
-    animation-play-state: running;
+#algorithmDropdown {
+    flex-direction: row;
+    justify-content: center;
 }
-
-
-
-
-
-
-
-
-
