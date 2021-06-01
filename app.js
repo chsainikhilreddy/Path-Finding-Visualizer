@@ -53,7 +53,6 @@ class Queue {
         return this.sz;
     }
 }
-
 function initialize() {
     var temp1 = document.body.offsetHeight;
     var temp2 = document.getElementById("navigationBar").offsetHeight;
@@ -106,7 +105,7 @@ function initialize() {
             } else if (btn.className == "destination") {
                 isDest = true;
             } else {
-                btn.className = btn.className == "unvisited" ? "wall" : "unvisited";
+                btn.className = btn.className === "unvisited" ? "wall" : "unvisited";
             }
         });
         btn.addEventListener("mouseup", function () {
@@ -151,12 +150,68 @@ function initialize() {
                 }
             }
         });
+        btn.addEventListener("touchstart", function() {
+            console.log("touch start");
+            isMouseDown = true;
+            if (btn.className == "source") {
+                isSrc = true;
+            } else if (btn.className == "destination") {
+                isDest = true;
+            } else {
+                btn.className = btn.className === "unvisited" ? "wall" : "unvisited";
+            }
+        });
+
+        btn.addEventListener("touchend", function() {
+            console.log("touch end");
+            isMouseDown = isSrc = isDest = false;
+            if (doneExecution) {
+                clearPath();
+                visualizeButton.click();
+            }
+        });
+        btn.addEventListener("touchmove", function() {
+            console.log("touch move");
+            if (isMouseDown) {
+                if (isSrc) {
+                    if (btn.className != "destination") {
+                        buttons[srcNode].className = "unvisited";
+                        btn.className = "source";
+                        srcNode = parseInt(btn.id.substring(6));
+                        if (doneExecution) {
+                            clearPath();
+                            visualizeButton.click();
+                        }
+                    }
+                } else if (isDest) {
+                    if (btn.className != "source") {
+                        buttons[destNode].className = "unvisited";
+                        btn.className = "destination";
+                        destNode = parseInt(btn.id.substring(6));
+                        if (doneExecution) {
+                            clearPath();
+                            visualizeButton.click();
+                        }
+                    }
+                } else {
+                    if (btn.className != "source" && btn.className != "destination") {
+                        if (btn.className == "wall") {
+                            btn.className = "unvisited";
+                            btn.style.backgroundColor = "white";
+                        } else {
+                            btn.className = "wall";
+                            btn.style.backgroundColor = "black";
+                        }
+                    }
+                }
+            }
+        });
 
     }
 
     document.getElementById("button" + srcNode).className = "source";
     document.getElementById("button" + destNode).className = "destination";
-    
+
     $(document).ready(function () {
         $(".dropdown-menu a").click(function () {
             $("#options").text($(this).text());
@@ -188,8 +243,8 @@ function initialize() {
             visitedColor = this.value;
         }
     });
-
     document.getElementById("theme-color").setAttribute("value", "#d5cbe7");
+
     document.getElementById("theme-color").addEventListener("change", function () {
         if (doneExecution) {
             themeColor = this.value;
@@ -432,7 +487,7 @@ async function dfs_helper(src, dest) {
     --dest;
     let src_row = Math.floor(src / cols),
         src_col = src % cols;
-    
+
     await dfs(src_row, src_col);
     if (!doneExecution) {
         for (let i = 1; i <= rows * cols; i++) {
@@ -447,7 +502,7 @@ async function bfs_helper(src, dest) {
     --dest;
     let src_row = Math.floor(src / cols),
         src_col = src % cols;
-    
+
     await bfs(src_row, src_col);
     if (!doneExecution) {
         for (let i = 1; i <= rows * cols; i++) {
